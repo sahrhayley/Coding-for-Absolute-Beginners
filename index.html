@@ -18,11 +18,12 @@
     button:focus-visible,a:focus-visible,textarea:focus-visible { outline:3px solid #aa8aff; outline-offset:3px; }
     .skip { position:absolute; top:-100px; left:14px; z-index:5; background:white; padding:10px; }
     .skip:focus { top:10px; }
-    .shell { max-width:1280px; margin:0 auto; padding:0 24px; }
+    .shell { max-width:1360px; margin:0 auto; padding:0 24px; }
     header { background:linear-gradient(135deg,#eee8ff,#fdeef9); border-bottom:1px solid var(--line); }
     .hero { padding:43px 0 28px; }
     .eyebrow { text-transform:uppercase; letter-spacing:.13em; font-size:.72rem; color:var(--purple); font-weight:800; }
     h1 { font-size:clamp(2rem,5vw,3.3rem); line-height:1.08; letter-spacing:-.045em; margin:8px 0 11px; }
+    .title-icon { display:inline-block; width:.9em; height:.9em; vertical-align:-.08em; color:var(--purple); }
     .intro { color:#534b66; max-width:660px; margin:0; font-size:1.04rem; }
     nav { display:flex; gap:8px; overflow-x:auto; padding:13px 0; scrollbar-width:thin; }
     .tab { flex:0 0 auto; padding:10px 15px; border:1px solid transparent; border-radius:12px; background:transparent; color:#55496e; cursor:pointer; font-weight:750; font-size:.9rem; }
@@ -80,15 +81,15 @@
   <header>
     <div class="shell hero">
       <div class="eyebrow">No experience required</div>
-      <h1>Coding for Absolute Beginners 💻</h1>
+      <h1>Coding for Absolute Beginners <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></h1>
       <p class="intro">A no-fluff guide to what code is, what it does, and how to make your first tiny website.</p>
     </div>
     <div class="shell">
       <nav aria-label="Course pages" role="tablist">
         <button class="tab" role="tab" id="tab-start" aria-controls="start" aria-selected="true" data-page="start">Start Here</button>
         <button class="tab" role="tab" id="tab-languages" aria-controls="languages" aria-selected="false" data-page="languages">Languages</button>
-        <button class="tab" role="tab" id="tab-try" aria-controls="try" aria-selected="false" data-page="try">Try It</button>
         <button class="tab" role="tab" id="tab-explained" aria-controls="explained" aria-selected="false" data-page="explained">Code Explained</button>
+        <button class="tab" role="tab" id="tab-try" aria-controls="try" aria-selected="false" data-page="try">Try It</button>
         <button class="tab" role="tab" id="tab-resources" aria-controls="resources" aria-selected="false" data-page="resources">Resources &amp; AI</button>
       </nav>
     </div>
@@ -132,6 +133,61 @@
       <div class="grid">
         <div class="card"><h3>🐍 Python — later</h3><p>Used for general programming, calculations, automations, and tools.</p></div>
         <div class="card"><h3>🗄️ SQL — later</h3><p>Used to retrieve and manage information in databases, such as appointments or inventory.</p></div>
+      </div>
+      <div class="actions"><button class="btn" data-go="explained">Learn what the code means →</button></div>
+    </section>
+
+    <section class="page" role="tabpanel" aria-labelledby="tab-explained" id="explained" hidden>
+      <h2>Code explained, minus the headache</h2>
+      <p class="section-lead">Here's what you're looking at in the example.</p>
+      <div class="card">
+        <span class="tag">HTML</span>
+        <h3>Tags tell the browser what something is.</h3>
+        <pre class="code">&lt;h1&gt;My First Website&lt;/h1&gt;
+&lt;p&gt;Hello!&lt;/p&gt;
+&lt;button&gt;Click Me!&lt;/button&gt;</pre>
+        <p><code>&lt;h1&gt;</code> = large heading. <code>&lt;p&gt;</code> = paragraph. <code>&lt;button&gt;</code> = button.</p>
+        <p>The closing tag, like <code>&lt;/h1&gt;</code>, marks where that element ends.</p>
+      </div>
+      <div class="card practice">
+        <span class="tag">CSS</span>
+        <h3>Rules tell the browser what to style.</h3>
+        <pre class="code">h1 {
+  color: purple;
+}</pre>
+        <p><code>h1</code> picks the heading. Braces <code>{ }</code> contain the styles. <code>color</code> means text color, <code>purple</code> is the chosen value, the colon separates them, and the semicolon ends the instruction.</p>
+        <p><strong>Important:</strong> This colors the heading, <em>not</em> the button. To style a button, use <code>button { ... }</code>.</p>
+      </div>
+      <div class="card practice">
+        <span class="tag">JavaScript</span>
+        <h3>A function is a named set of instructions.</h3>
+        <pre class="code">function changeText() {
+  document.getElementById("message").innerText =
+    "You clicked the button!";
+}</pre>
+        <p><code>function</code> defines instructions named <code>changeText</code>. The parentheses hold any inputs (none here); braces contain the instructions.</p>
+        <p><code>document.getElementById("message")</code> finds the paragraph with that ID. <code>.innerText =</code> replaces its words. The HTML button's <code>onclick="changeText()"</code> runs this function when clicked.</p>
+      </div>
+      <div class="card practice">
+        <span class="tag">Formatting</span>
+        <h3>Why does code look “pretty”?</h3>
+        <p>These two CSS examples work the same way:</p>
+        <pre class="code">h1 { color: purple; font-size: 30px; }</pre>
+        <pre class="code">h1 {
+  color: purple;
+  font-size: 30px;
+}</pre>
+        <p>Line breaks and indentation make code easier for <em>people</em> to read. Most CSS spacing doesn't change what it does. But punctuation matters, and some JavaScript line breaks can matter too.</p>
+      </div>
+      <div class="card practice quiz">
+        <h3>Quick check</h3>
+        <p>Which language changes the background color?</p>
+        <div class="answers" aria-label="Quiz answers">
+          <button class="choice" data-answer="html">HTML</button>
+          <button class="choice" data-answer="css">CSS</button>
+          <button class="choice" data-answer="javascript">JavaScript</button>
+        </div>
+        <p class="feedback" id="quiz-feedback" role="status"></p>
       </div>
       <div class="actions"><button class="btn" data-go="try">Try some code →</button></div>
     </section>
@@ -190,61 +246,6 @@ button {
           <li>Change the button's message to something funny.</li>
         </ol>
         <p class="tiny">You can experiment all you want. Reset brings the original example back.</p>
-      </div>
-      <div class="actions"><button class="btn" data-go="explained">What does that code mean? →</button></div>
-    </section>
-
-    <section class="page" role="tabpanel" aria-labelledby="tab-explained" id="explained" hidden>
-      <h2>Code explained, minus the headache</h2>
-      <p class="section-lead">Here's what you're looking at in the example.</p>
-      <div class="card">
-        <span class="tag">HTML</span>
-        <h3>Tags tell the browser what something is.</h3>
-        <pre class="code">&lt;h1&gt;My First Website&lt;/h1&gt;
-&lt;p&gt;Hello!&lt;/p&gt;
-&lt;button&gt;Click Me!&lt;/button&gt;</pre>
-        <p><code>&lt;h1&gt;</code> = large heading. <code>&lt;p&gt;</code> = paragraph. <code>&lt;button&gt;</code> = button.</p>
-        <p>The closing tag, like <code>&lt;/h1&gt;</code>, marks where that element ends.</p>
-      </div>
-      <div class="card practice">
-        <span class="tag">CSS</span>
-        <h3>Rules tell the browser what to style.</h3>
-        <pre class="code">h1 {
-  color: purple;
-}</pre>
-        <p><code>h1</code> picks the heading. Braces <code>{ }</code> contain the styles. <code>color</code> means text color, <code>purple</code> is the chosen value, the colon separates them, and the semicolon ends the instruction.</p>
-        <p><strong>Important:</strong> This colors the heading, <em>not</em> the button. To style a button, use <code>button { ... }</code>.</p>
-      </div>
-      <div class="card practice">
-        <span class="tag">JavaScript</span>
-        <h3>A function is a named set of instructions.</h3>
-        <pre class="code">function changeText() {
-  document.getElementById("message").innerText =
-    "You clicked the button!";
-}</pre>
-        <p><code>function</code> defines instructions named <code>changeText</code>. The parentheses hold any inputs (none here); braces contain the instructions.</p>
-        <p><code>document.getElementById("message")</code> finds the paragraph with that ID. <code>.innerText =</code> replaces its words. The HTML button's <code>onclick="changeText()"</code> runs this function when clicked.</p>
-      </div>
-      <div class="card practice">
-        <span class="tag">Formatting</span>
-        <h3>Why does code look “pretty”?</h3>
-        <p>These two CSS examples work the same way:</p>
-        <pre class="code">h1 { color: purple; font-size: 30px; }</pre>
-        <pre class="code">h1 {
-  color: purple;
-  font-size: 30px;
-}</pre>
-        <p>Line breaks and indentation make code easier for <em>people</em> to read. Most CSS spacing doesn't change what it does. But punctuation matters, and some JavaScript line breaks can matter too.</p>
-      </div>
-      <div class="card practice quiz">
-        <h3>Quick check</h3>
-        <p>Which language changes the background color?</p>
-        <div class="answers" aria-label="Quiz answers">
-          <button class="choice" data-answer="html">HTML</button>
-          <button class="choice" data-answer="css">CSS</button>
-          <button class="choice" data-answer="javascript">JavaScript</button>
-        </div>
-        <p class="feedback" id="quiz-feedback" role="status"></p>
       </div>
       <div class="actions"><button class="btn" data-go="resources">Where to learn next →</button></div>
     </section>
