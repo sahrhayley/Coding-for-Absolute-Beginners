@@ -76,6 +76,7 @@
     }
     .preview { width:100%; height:265px; display:block; border:1px solid var(--line); border-radius:14px; background:white; }
     .practice { margin-top:22px; }
+    .resources-heading { margin-top:26px; font-size:1.22rem; }
     .quiz { margin-top:20px; }
     .answers { display:flex; flex-wrap:wrap; gap:9px; margin-top:10px; }
     .choice { cursor:pointer; border-radius:10px; border:1px solid #bfd5f0; padding:10px 14px; background:white; color:#28486d; font-weight:700; }
@@ -301,7 +302,15 @@ button {
     </section>
 
     <section class="page" role="tabpanel" aria-labelledby="tab-resources" id="resources" hidden>
-      <h2>Where to learn next</h2>
+      <h2>Resources &amp; AI Help</h2>
+      <div class="card">
+        <h3>🤖 ChatGPT and Claude are your friends.</h3>
+        <p>AI can help write code, explain a confusing line, and find mistakes. Ask it to <em>teach you</em>, not just do everything for you.</p>
+        <div class="actions"><button class="btn secondary copy" data-copy="Explain this code like I've never coded before. Go one small step at a time.">Copy “explain this” prompt</button><button class="btn secondary copy" data-copy="Help me build a simple webpage one step at a time. Explain what each change does and let me try it myself.">Copy “teach me” prompt</button></div>
+        <p class="tiny" id="copy-status" aria-live="polite"></p>
+      </div>
+      <div class="note">Remember: You don't need to memorize code. Start small, change things, make mistakes, and ask questions.</div>
+      <h3 class="resources-heading">Where to learn next</h3>
       <p class="section-lead">Pick one learning tool and keep it simple.</p>
       <div class="grid">
         <div class="card"><span class="tag">Start here</span><h3>Sololearn</h3><p>Short lessons. Begin with HTML, then CSS, then JavaScript.</p><a href="https://www.sololearn.com/" target="_blank" rel="noopener noreferrer">Open Sololearn ↗</a></div>
@@ -309,13 +318,6 @@ button {
         <div class="card"><span class="tag">Extra lessons</span><h3>freeCodeCamp</h3><p>Free, step-by-step coding lessons and projects.</p><a href="https://www.freecodecamp.org/learn/" target="_blank" rel="noopener noreferrer">Open freeCodeCamp ↗</a></div>
         <div class="card"><span class="tag">Alternative explanations</span><h3>Khan Academy</h3><p>Interactive lessons for HTML and CSS.</p><a href="https://www.khanacademy.org/computing/html-css" target="_blank" rel="noopener noreferrer">Open Khan Academy ↗</a></div>
       </div>
-      <div class="card practice">
-        <h3>🤖 ChatGPT and Claude are your friends.</h3>
-        <p>AI can help write code, explain a confusing line, and find mistakes. Ask it to <em>teach you</em>, not just do everything for you.</p>
-        <div class="actions"><button class="btn secondary copy" data-copy="Explain this code like I've never coded before. Go one small step at a time.">Copy “explain this” prompt</button><button class="btn secondary copy" data-copy="Help me build a simple webpage one step at a time. Explain what each change does and let me try it myself.">Copy “teach me” prompt</button></div>
-        <p class="tiny" id="copy-status" aria-live="polite"></p>
-      </div>
-      <div class="note">Remember: You don't need to memorize code. Start small, change things, make mistakes, and ask questions.</div>
     </section>
   </main>
 
