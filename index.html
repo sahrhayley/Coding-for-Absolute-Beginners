@@ -26,6 +26,9 @@
     .title-icon { display:inline-block; width:.9em; height:.9em; vertical-align:-.08em; color:var(--blue); }
     .intro { color:#4c5e78; max-width:660px; margin:0; font-size:1.04rem; }
     nav { display:flex; gap:8px; overflow-x:auto; padding:13px 0; scrollbar-width:thin; }
+    .nav-wrap { position:relative; }
+    .nav-scroll { display:none; }
+    .nav-scroll[hidden] { display:none; }
     .tab { flex:0 0 auto; padding:10px 15px; border:1px solid transparent; border-radius:12px; background:transparent; color:#415874; cursor:pointer; font-weight:750; font-size:.9rem; }
     .tab:hover { background:#d6e9ff; }
     .tab[aria-selected="true"] { background:#fff; border-color:#b9d8ff; color:#1e40af; box-shadow:0 3px 12px #174ea612; }
@@ -92,7 +95,19 @@
       .grid,.three,.editor-grid { grid-template-columns:1fr; }
       .card { padding:18px; }
       .full { grid-column:auto; }
-      nav { margin-right:-20px; padding-right:20px; }
+      nav { margin-right:-20px; padding-right:90px; scrollbar-width:none; }
+      nav::-webkit-scrollbar { display:none; }
+      .nav-scroll {
+        display:inline-flex; align-items:center; justify-content:center;
+        position:absolute; top:50%; transform:translateY(-50%);
+        z-index:2; border:1px solid #b9d8ff; border-radius:999px;
+        padding:8px 12px; background:rgba(255,255,255,.97);
+        color:#1e40af; box-shadow:0 2px 12px #174ea623;
+        font-size:.81rem; font-weight:800; cursor:pointer; min-height:38px;
+      }
+      .nav-next { right:7px; }
+      .nav-prev { left:7px; }
+      .nav-scroll:focus-visible { outline:3px solid #60a5fa; outline-offset:2px; }
       .tab { padding:9px 12px; }
     }
   </style>
@@ -105,7 +120,7 @@
       <h1>Coding for Absolute Beginners <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></h1>
       <p class="intro">A no-fluff guide to what code is, what it does, and how to make your first tiny website.</p>
     </div>
-    <div class="shell">
+    <div class="shell nav-wrap">
       <nav aria-label="Course pages" role="tablist">
         <button class="tab" role="tab" id="tab-start" aria-controls="start" aria-selected="true" data-page="start">Start Here</button>
         <button class="tab" role="tab" id="tab-languages" aria-controls="languages" aria-selected="false" data-page="languages">Languages</button>
@@ -113,6 +128,8 @@
         <button class="tab" role="tab" id="tab-try" aria-controls="try" aria-selected="false" data-page="try">Try It</button>
         <button class="tab" role="tab" id="tab-resources" aria-controls="resources" aria-selected="false" data-page="resources">Resources &amp; AI</button>
       </nav>
+      <button class="nav-scroll nav-prev" id="nav-prev" type="button" aria-label="Scroll to previous pages" hidden>←</button>
+      <button class="nav-scroll nav-next" id="nav-next" type="button" aria-label="Scroll to more pages" hidden>More →</button>
     </div>
   </header>
 
@@ -326,6 +343,25 @@ button {
     (function () {
       const tabs = Array.from(document.querySelectorAll('[data-page]'));
       const pages = Array.from(document.querySelectorAll('.page'));
+      const pageNav = document.querySelector('.nav-wrap nav');
+      const prevPagesButton = document.getElementById('nav-prev');
+      const nextPagesButton = document.getElementById('nav-next');
+      function updatePageArrows() {
+        const maxScroll = pageNav.scrollWidth - pageNav.clientWidth;
+        const show = window.matchMedia('(max-width:700px)').matches && maxScroll > 3;
+        prevPagesButton.hidden = !show || pageNav.scrollLeft <= 3;
+        nextPagesButton.hidden = !show || pageNav.scrollLeft >= maxScroll - 3;
+      }
+      pageNav.addEventListener('scroll', updatePageArrows, { passive:true });
+      window.addEventListener('resize', updatePageArrows);
+      window.addEventListener('load', updatePageArrows);
+      prevPagesButton.addEventListener('click', function () {
+        pageNav.scrollBy({ left: -Math.max(200, pageNav.clientWidth * .75), behavior: 'smooth' });
+      });
+      nextPagesButton.addEventListener('click', function () {
+        pageNav.scrollBy({ left: Math.max(200, pageNav.clientWidth * .75), behavior: 'smooth' });
+      });
+      updatePageArrows();
       function showPage(name, moveFocus) {
         if (!document.getElementById(name) || !pages.some(function (p) { return p.id === name; })) return;
         tabs.forEach(function (tab) {
