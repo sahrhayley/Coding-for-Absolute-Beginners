@@ -50,6 +50,21 @@
     .steps li { display:flex; align-items:flex-start; gap:12px; background:white; border:1px solid var(--line); border-radius:13px; padding:13px; }
     .num { flex:0 0 auto; display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--pale-blue); font-weight:800; color:var(--blue); }
     .code { margin:12px 0; background:#13253e; color:#eaf4ff; padding:14px 16px; border-radius:12px; white-space:pre-wrap; overflow:auto; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.84rem; line-height:1.65; }
+
+    /* Code breakdown: one readable definition per row */
+    .code-glossary { margin:14px 0 0; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#f9fcff; }
+    .glossary-row { display:grid; grid-template-columns:minmax(165px,235px) minmax(0,1fr); gap:16px; align-items:center; padding:12px 15px; }
+    .glossary-row + .glossary-row { border-top:1px solid var(--line); }
+    .glossary-row:nth-child(even) { background:#eff6ff; }
+    .glossary-row dt, .glossary-row dd { margin:0; min-width:0; }
+    .glossary-row dt code { display:inline-block; max-width:100%; padding:5px 10px; border-radius:8px; border:1px solid #c6defc; background:#fff; color:#1d4ed8; font-size:.86rem; font-weight:750; overflow-wrap:anywhere; }
+    .glossary-row dd { color:#334963; font-size:.93rem; }
+    .glossary-label { margin:16px 0 9px; font-size:.74rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase; color:#2d5c9e; }
+    .explain-tip { margin-top:15px; margin-bottom:0; }
+    @media (max-width:700px) {
+      .glossary-row { grid-template-columns:1fr; gap:5px; padding:12px 14px; }
+      .glossary-row dt code { font-size:.82rem; }
+    }
     .tiny { color:var(--muted); font-size:.88rem; }
     .editor-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
     .field label { display:block; font-size:.9rem; font-weight:800; margin-bottom:8px; }
@@ -146,8 +161,13 @@
         <pre class="code">&lt;h1&gt;My First Website&lt;/h1&gt;
 &lt;p&gt;Hello!&lt;/p&gt;
 &lt;button&gt;Click Me!&lt;/button&gt;</pre>
-        <p><code>&lt;h1&gt;</code> = large heading. <code>&lt;p&gt;</code> = paragraph. <code>&lt;button&gt;</code> = button.</p>
-        <p>The closing tag, like <code>&lt;/h1&gt;</code>, marks where that element ends.</p>
+        <p class="glossary-label">What each part means</p>
+        <dl class="code-glossary">
+          <div class="glossary-row"><dt><code>&lt;h1&gt;</code></dt><dd>Creates a large heading.</dd></div>
+          <div class="glossary-row"><dt><code>&lt;p&gt;</code></dt><dd>Creates a paragraph of text.</dd></div>
+          <div class="glossary-row"><dt><code>&lt;button&gt;</code></dt><dd>Creates a clickable button.</dd></div>
+          <div class="glossary-row"><dt><code>&lt;/h1&gt;</code></dt><dd>A closing tag. It tells the browser where the heading ends.</dd></div>
+        </dl>
       </div>
       <div class="card practice">
         <span class="tag">CSS</span>
@@ -155,8 +175,16 @@
         <pre class="code">h1 {
   color: purple;
 }</pre>
-        <p><code>h1</code> picks the heading. Braces <code>{ }</code> contain the styles. <code>color</code> means text color, <code>purple</code> is the chosen value, the colon separates them, and the semicolon ends the instruction.</p>
-        <p><strong>Important:</strong> This colors the heading, <em>not</em> the button. To style a button, use <code>button { ... }</code>.</p>
+        <p class="glossary-label">What each part means</p>
+        <dl class="code-glossary">
+          <div class="glossary-row"><dt><code>h1</code></dt><dd>Selects the heading you want to style.</dd></div>
+          <div class="glossary-row"><dt><code>{ }</code></dt><dd>Holds the styling instructions together.</dd></div>
+          <div class="glossary-row"><dt><code>color</code></dt><dd>The property that changes text color.</dd></div>
+          <div class="glossary-row"><dt><code>:</code></dt><dd>Separates a property from its value.</dd></div>
+          <div class="glossary-row"><dt><code>purple</code></dt><dd>The color chosen for this example.</dd></div>
+          <div class="glossary-row"><dt><code>;</code></dt><dd>Ends that styling instruction.</dd></div>
+        </dl>
+        <div class="note explain-tip"><strong>Important:</strong> This changes the <strong>heading's</strong> color, not the button's. To style a button, use <code>button { ... }</code>.</div>
       </div>
       <div class="card practice">
         <span class="tag">JavaScript</span>
@@ -165,8 +193,19 @@
   document.getElementById("message").innerText =
     "You clicked the button!";
 }</pre>
-        <p><code>function</code> defines instructions named <code>changeText</code>. The parentheses hold any inputs (none here); braces contain the instructions.</p>
-        <p><code>document.getElementById("message")</code> finds the paragraph with that ID. <code>.innerText =</code> replaces its words. The HTML button's <code>onclick="changeText()"</code> runs this function when clicked.</p>
+        <p class="glossary-label">What each part means</p>
+        <dl class="code-glossary">
+          <div class="glossary-row"><dt><code>function</code></dt><dd>Starts a reusable set of instructions.</dd></div>
+          <div class="glossary-row"><dt><code>changeText</code></dt><dd>The name we gave this function.</dd></div>
+          <div class="glossary-row"><dt><code>()</code></dt><dd>Holds inputs to the function. Empty in this example.</dd></div>
+          <div class="glossary-row"><dt><code>{ }</code></dt><dd>Holds the instructions the function runs.</dd></div>
+          <div class="glossary-row"><dt><code>document</code></dt><dd>Refers to the webpage.</dd></div>
+          <div class="glossary-row"><dt><code>getElementById("message")</code></dt><dd>Finds the HTML element with <code>id="message"</code>.</dd></div>
+          <div class="glossary-row"><dt><code>.innerText</code></dt><dd>Refers to the text inside that element.</dd></div>
+          <div class="glossary-row"><dt><code>=</code></dt><dd>Sets a new value, replacing the old text.</dd></div>
+          <div class="glossary-row"><dt><code>"You clicked the button!"</code></dt><dd>The new words to display.</dd></div>
+          <div class="glossary-row"><dt><code>onclick="changeText()"</code></dt><dd>Tells the HTML button to run this function when clicked.</dd></div>
+        </dl>
       </div>
       <div class="card practice">
         <span class="tag">Formatting</span>
@@ -177,7 +216,13 @@
   color: purple;
   font-size: 30px;
 }</pre>
-        <p>Line breaks and indentation make code easier for <em>people</em> to read. Most CSS spacing doesn't change what it does. But punctuation matters, and some JavaScript line breaks can matter too.</p>
+        <p class="glossary-label">What each part means</p>
+        <dl class="code-glossary">
+          <div class="glossary-row"><dt><code>Line breaks</code></dt><dd>Separate instructions so they're easier to read.</dd></div>
+          <div class="glossary-row"><dt><code>Indentation</code></dt><dd>Shows which pieces of code belong together.</dd></div>
+          <div class="glossary-row"><dt><code>Punctuation</code></dt><dd>Braces, quotes, and other symbols often matter even when spaces don't.</dd></div>
+        </dl>
+        <div class="note explain-tip"><strong>Same result, easier to read.</strong> Most CSS spacing can change without affecting the result. Some JavaScript line breaks do matter.</div>
       </div>
       <div class="card practice quiz">
         <h3>Quick check</h3>
