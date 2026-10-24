@@ -86,7 +86,8 @@
     details p { margin:12px 0 0; }
     footer { border-top:1px solid var(--line); padding:18px 0 30px; color:var(--muted); font-size:.83rem; }
     @media (max-width:700px) {
-      .hero { padding-top:30px; }
+      /* Give only the mobile title area extra breathing room. */
+      .hero { padding:30px 34px 28px; }
       .grid,.three,.editor-grid { grid-template-columns:1fr; }
       .card { padding:18px; }
       .full { grid-column:auto; }
