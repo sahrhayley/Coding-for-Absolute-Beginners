@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eee9ff">
+  <meta name="description" content="A tiny, friendly introduction to coding: HTML, CSS, JavaScript, your first live project, and helpful resources.">
+  <title>Coding for Absolute Beginners</title>
+  <style>
+    :root {
+      --bg:#f8f7ff; --ink:#242039; --muted:#625d77; --purple:#6844cd;
+      --lavender:#eee9ff; --line:#e2ddf1; --card:#ffffff; --pink:#f2c5e8;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; }
+    button,textarea { font:inherit; }
+    a { color:#5831b0; }
+    button:focus-visible,a:focus-visible,textarea:focus-visible { outline:3px solid #aa8aff; outline-offset:3px; }
+    .skip { position:absolute; top:-100px; left:14px; z-index:5; background:white; padding:10px; }
+    .skip:focus { top:10px; }
+    .shell { max-width:1040px; margin:0 auto; padding:0 20px; }
+    header { background:linear-gradient(135deg,#eee8ff,#fdeef9); border-bottom:1px solid var(--line); }
+    .hero { padding:43px 0 28px; }
+    .eyebrow { text-transform:uppercase; letter-spacing:.13em; font-size:.72rem; color:var(--purple); font-weight:800; }
+    h1 { font-size:clamp(2rem,5vw,3.3rem); line-height:1.08; letter-spacing:-.045em; margin:8px 0 11px; }
+    .intro { color:#534b66; max-width:660px; margin:0; font-size:1.04rem; }
+    nav { display:flex; gap:8px; overflow-x:auto; padding:13px 0; scrollbar-width:thin; }
+    .tab { flex:0 0 auto; padding:10px 15px; border:1px solid transparent; border-radius:12px; background:transparent; color:#55496e; cursor:pointer; font-weight:750; font-size:.9rem; }
+    .tab:hover { background:#e2d8ff; }
+    .tab[aria-selected="true"] { background:#fff; border-color:#d6c8fa; color:#4f2da8; box-shadow:0 3px 12px #3c278712; }
+    main { padding-top:28px!important; padding-bottom:60px!important; }
+    .page[hidden] { display:none; }
+    h2 { font-size:clamp(1.5rem,3vw,2rem); letter-spacing:-.035em; margin:0 0 6px; }
+    h3 { font-size:1.07rem; margin:0 0 8px; }
+    p { margin:0 0 12px; }
+    .section-lead { color:var(--muted); margin-bottom:24px; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+    .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:0 4px 20px #3c278707; }
+    .card p:last-child { margin-bottom:0; }
+    .tag { display:inline-block; font-size:.72rem; font-weight:800; border-radius:20px; background:var(--lavender); color:#5833a9; padding:4px 10px; margin-bottom:12px; }
+    .note { background:#f1edff; border-left:4px solid #a38be8; border-radius:0 12px 12px 0; padding:16px 18px; margin:19px 0; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; gap:7px; padding:11px 17px; border-radius:11px; border:1px solid var(--purple); background:var(--purple); color:white; font-weight:750; text-decoration:none; cursor:pointer; }
+    .btn:hover { background:#5631bb; }
+    .btn.secondary { color:var(--purple); background:white; border-color:#d9cff7; }
+    .btn.secondary:hover { background:#f2eeff; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    .steps { display:grid; gap:10px; margin:0; padding:0; list-style:none; }
+    .steps li { display:flex; align-items:flex-start; gap:12px; background:white; border:1px solid var(--line); border-radius:13px; padding:13px; }
+    .num { flex:0 0 auto; display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--lavender); font-weight:800; color:var(--purple); }
+    .code { margin:12px 0; background:#241f36; color:#f2edff; padding:14px 16px; border-radius:12px; white-space:pre-wrap; overflow:auto; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.84rem; line-height:1.65; }
+    .tiny { color:var(--muted); font-size:.88rem; }
+    .editor-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    .field label { display:block; font-size:.9rem; font-weight:800; margin-bottom:8px; }
+    textarea { display:block; width:100%; min-height:130px; resize:vertical; border:1px solid #d6ceee; border-radius:12px; background:#fbfaff; color:#252036; padding:13px; font-family:ui-monospace,Consolas,monospace; font-size:.85rem; line-height:1.55; }
+    .full { grid-column:1 / -1; }
+    .preview { width:100%; height:265px; display:block; border:1px solid var(--line); border-radius:14px; background:white; }
+    .practice { margin-top:22px; }
+    .quiz { margin-top:20px; }
+    .answers { display:flex; flex-wrap:wrap; gap:9px; margin-top:10px; }
+    .choice { cursor:pointer; border-radius:10px; border:1px solid #d5c9ed; padding:10px 14px; background:white; color:#3b315b; font-weight:700; }
+    .choice:hover { background:#f0ebff; }
+    .feedback { font-weight:750; min-height:26px; padding-top:10px; }
+    details { border:1px solid var(--line); background:white; border-radius:12px; padding:13px 16px; margin-bottom:10px; }
+    summary { cursor:pointer; font-weight:750; }
+    details p { margin:12px 0 0; }
+    footer { border-top:1px solid var(--line); padding:18px 0 30px; color:var(--muted); font-size:.83rem; }
+    @media (max-width:700px) {
+      .hero { padding-top:30px; }
+      .grid,.three,.editor-grid { grid-template-columns:1fr; }
+      .card { padding:18px; }
+      .full { grid-column:auto; }
+      nav { margin-right:-20px; padding-right:20px; }
+      .tab { padding:9px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to lesson</a>
+  <header>
+    <div class="shell hero">
+      <div class="eyebrow">No experience required</div>
+      <h1>Coding for Absolute Beginners 💻</h1>
+      <p class="intro">A no-fluff guide to what code is, what it does, and how to make your first tiny website.</p>
+    </div>
+    <div class="shell">
+      <nav aria-label="Course pages" role="tablist">
+        <button class="tab" role="tab" id="tab-start" aria-controls="start" aria-selected="true" data-page="start">Start Here</button>
+        <button class="tab" role="tab" id="tab-languages" aria-controls="languages" aria-selected="false" data-page="languages">Languages</button>
+        <button class="tab" role="tab" id="tab-try" aria-controls="try" aria-selected="false" data-page="try">Try It</button>
+        <button class="tab" role="tab" id="tab-explained" aria-controls="explained" aria-selected="false" data-page="explained">Code Explained</button>
+        <button class="tab" role="tab" id="tab-resources" aria-controls="resources" aria-selected="false" data-page="resources">Resources &amp; AI</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell" id="content">
+    <section class="page" role="tabpanel" aria-labelledby="tab-start" id="start">
+      <h2>What the fuck is coding?</h2>
+      <p class="section-lead">It's just writing instructions for a computer. Seriously.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="tag">The basic idea</span>
+          <h3>Code tells computers what to do.</h3>
+          <p>Websites, apps, and games all follow instructions written in code. Different languages handle different jobs.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Your first goal</span>
+          <h3>Make one tiny webpage.</h3>
+          <p>Start with words and a button. Then change its colors. Then make the button do something.</p>
+        </div>
+      </div>
+      <div class="note"><strong>You do not have to memorize code.</strong> Look things up, try stuff, break things, and fix them. That's normal.</div>
+      <h3>Your path</h3>
+      <ol class="steps">
+        <li><span class="num">1</span><div><strong>HTML</strong> — put things on a page.</div></li>
+        <li><span class="num">2</span><div><strong>CSS</strong> — make them look how you want.</div></li>
+        <li><span class="num">3</span><div><strong>JavaScript</strong> — make them respond to clicks.</div></li>
+      </ol>
+      <div class="actions"><button class="btn" data-go="languages">Meet the languages →</button></div>
+    </section>
+
+    <section class="page" role="tabpanel" aria-labelledby="tab-languages" id="languages" hidden>
+      <h2>What does each language do?</h2>
+      <p class="section-lead">Start with the first three. The others can wait.</p>
+      <div class="grid three">
+        <div class="card"><span class="tag">Learn first</span><h3>🏗️ HTML</h3><p><strong>Structure.</strong> Adds headings, paragraphs, pictures, links, and buttons.</p></div>
+        <div class="card"><span class="tag">Learn second</span><h3>🎨 CSS</h3><p><strong>Appearance.</strong> Changes colors, fonts, sizes, spacing, and layouts.</p></div>
+        <div class="card"><span class="tag">Learn third</span><h3>⚡ JavaScript</h3><p><strong>Interaction.</strong> Makes things react to clicks, change, and keep score.</p></div>
+      </div>
+      <div class="note"><strong>Remember:</strong> HTML creates a button. CSS makes it pink. JavaScript makes it work.</div>
+      <div class="grid">
+        <div class="card"><h3>🐍 Python — later</h3><p>Used for general programming, calculations, automations, and tools.</p></div>
+        <div class="card"><h3>🗄️ SQL — later</h3><p>Used to retrieve and manage information in databases, such as appointments or inventory.</p></div>
+      </div>
+      <div class="actions"><button class="btn" data-go="try">Try some code →</button></div>
+    </section>
+
+    <section class="page" role="tabpanel" aria-labelledby="tab-try" id="try" hidden>
+      <h2>Make your first webpage</h2>
+      <p class="section-lead">Change the code, press <strong>Run Code</strong>, and see what happens. This runs right here on the site.</p>
+      <div class="editor-grid">
+        <div class="field">
+          <label for="html-code">1. HTML — content</label>
+          <textarea id="html-code" spellcheck="false" aria-label="HTML code">&lt;h1&gt;My First Website&lt;/h1&gt;
+&lt;p&gt;I'm learning how to code!&lt;/p&gt;
+&lt;button onclick="changeText()"&gt;Click Me!&lt;/button&gt;
+&lt;p id="message"&gt;Hello!&lt;/p&gt;</textarea>
+        </div>
+        <div class="field">
+          <label for="css-code">2. CSS — appearance</label>
+          <textarea id="css-code" spellcheck="false" aria-label="CSS code">body {
+  background-color: lavender;
+  text-align: center;
+  font-family: Arial;
+  padding: 20px;
+}
+h1 { color: purple; }
+button {
+  background-color: pink;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}</textarea>
+        </div>
+        <div class="field full">
+          <label for="js-code">3. JavaScript — actions</label>
+          <textarea id="js-code" spellcheck="false" aria-label="JavaScript code">function changeText() {
+  document.getElementById("message").innerText =
+    "You clicked the button!";
+}</textarea>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="run">▶ Run Code</button>
+        <button class="btn secondary" id="reset">Reset example</button>
+        <a class="btn secondary" href="https://codepen.io/pen/" target="_blank" rel="noopener noreferrer">Open CodePen ↗</a>
+      </div>
+      <div class="practice card">
+        <h3>Live preview</h3>
+        <iframe id="preview" class="preview" title="Your live webpage preview" sandbox="allow-scripts"></iframe>
+        <p class="tiny" id="run-status" aria-live="polite">Edit the code above, then tap Run Code.</p>
+      </div>
+      <div class="card practice">
+        <h3>Three tiny challenges</h3>
+        <ol>
+          <li>Change <code>lavender</code> to <code>lightblue</code>.</li>
+          <li>Change the heading from “My First Website” to your own title.</li>
+          <li>Change the button's message to something funny.</li>
+        </ol>
+        <p class="tiny">You can experiment all you want. Reset brings the original example back.</p>
+      </div>
+      <div class="actions"><button class="btn" data-go="explained">What does that code mean? →</button></div>
+    </section>
+
+    <section class="page" role="tabpanel" aria-labelledby="tab-explained" id="explained" hidden>
+      <h2>Code explained, minus the headache</h2>
+      <p class="section-lead">Here's what you're looking at in the example.</p>
+      <div class="card">
+        <span class="tag">HTML</span>
+        <h3>Tags tell the browser what something is.</h3>
+        <pre class="code">&lt;h1&gt;My First Website&lt;/h1&gt;
+&lt;p&gt;Hello!&lt;/p&gt;
+&lt;button&gt;Click Me!&lt;/button&gt;</pre>
+        <p><code>&lt;h1&gt;</code> = large heading. <code>&lt;p&gt;</code> = paragraph. <code>&lt;button&gt;</code> = button.</p>
+        <p>The closing tag, like <code>&lt;/h1&gt;</code>, marks where that element ends.</p>
+      </div>
+      <div class="card practice">
+        <span class="tag">CSS</span>
+        <h3>Rules tell the browser what to style.</h3>
+        <pre class="code">h1 {
+  color: purple;
+}</pre>
+        <p><code>h1</code> picks the heading. Braces <code>{ }</code> contain the styles. <code>color</code> means text color, <code>purple</code> is the chosen value, the colon separates them, and the semicolon ends the instruction.</p>
+        <p><strong>Important:</strong> This colors the heading, <em>not</em> the button. To style a button, use <code>button { ... }</code>.</p>
+      </div>
+      <div class="card practice">
+        <span class="tag">JavaScript</span>
+        <h3>A function is a named set of instructions.</h3>
+        <pre class="code">function changeText() {
+  document.getElementById("message").innerText =
+    "You clicked the button!";
+}</pre>
+        <p><code>function</code> defines instructions named <code>changeText</code>. The parentheses hold any inputs (none here); braces contain the instructions.</p>
+        <p><code>document.getElementById("message")</code> finds the paragraph with that ID. <code>.innerText =</code> replaces its words. The HTML button's <code>onclick="changeText()"</code> runs this function when clicked.</p>
+      </div>
+      <div class="card practice">
+        <span class="tag">Formatting</span>
+        <h3>Why does code look “pretty”?</h3>
+        <p>These two CSS examples work the same way:</p>
+        <pre class="code">h1 { color: purple; font-size: 30px; }</pre>
+        <pre class="code">h1 {
+  color: purple;
+  font-size: 30px;
+}</pre>
+        <p>Line breaks and indentation make code easier for <em>people</em> to read. Most CSS spacing doesn't change what it does. But punctuation matters, and some JavaScript line breaks can matter too.</p>
+      </div>
+      <div class="card practice quiz">
+        <h3>Quick check</h3>
+        <p>Which language changes the background color?</p>
+        <div class="answers" aria-label="Quiz answers">
+          <button class="choice" data-answer="html">HTML</button>
+          <button class="choice" data-answer="css">CSS</button>
+          <button class="choice" data-answer="javascript">JavaScript</button>
+        </div>
+        <p class="feedback" id="quiz-feedback" role="status"></p>
+      </div>
+      <div class="actions"><button class="btn" data-go="resources">Where to learn next →</button></div>
+    </section>
+
+    <section class="page" role="tabpanel" aria-labelledby="tab-resources" id="resources" hidden>
+      <h2>Where to learn next</h2>
+      <p class="section-lead">Pick one learning tool and keep it simple.</p>
+      <div class="grid">
+        <div class="card"><span class="tag">Start here</span><h3>Sololearn</h3><p>Short lessons. Begin with HTML, then CSS, then JavaScript.</p><a href="https://www.sololearn.com/" target="_blank" rel="noopener noreferrer">Open Sololearn ↗</a></div>
+        <div class="card"><span class="tag">Practice</span><h3>CodePen</h3><p>Type code and see your webpage change. Good for quick experiments.</p><a href="https://codepen.io/pen/" target="_blank" rel="noopener noreferrer">Open CodePen ↗</a></div>
+        <div class="card"><span class="tag">Extra lessons</span><h3>freeCodeCamp</h3><p>Free, step-by-step coding lessons and projects.</p><a href="https://www.freecodecamp.org/learn/" target="_blank" rel="noopener noreferrer">Open freeCodeCamp ↗</a></div>
+        <div class="card"><span class="tag">Alternative explanations</span><h3>Khan Academy</h3><p>Interactive lessons for HTML and CSS.</p><a href="https://www.khanacademy.org/computing/html-css" target="_blank" rel="noopener noreferrer">Open Khan Academy ↗</a></div>
+      </div>
+      <div class="card practice">
+        <h3>🤖 ChatGPT and Claude are your friends.</h3>
+        <p>AI can help write code, explain a confusing line, and find mistakes. Ask it to <em>teach you</em>, not just do everything for you.</p>
+        <div class="actions"><button class="btn secondary copy" data-copy="Explain this code like I've never coded before. Go one small step at a time.">Copy “explain this” prompt</button><button class="btn secondary copy" data-copy="Help me build a simple webpage one step at a time. Explain what each change does and let me try it myself.">Copy “teach me” prompt</button></div>
+        <p class="tiny" id="copy-status" aria-live="polite"></p>
+      </div>
+      <div class="note">Remember: You don't need to memorize code. Start small, change things, make mistakes, and ask questions.</div>
+    </section>
+  </main>
+
+  <footer><div class="shell">Made for learning, not for stressing yourself out. ✨</div></footer>
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('[data-page]'));
+      const pages = Array.from(document.querySelectorAll('.page'));
+      function showPage(name, moveFocus) {
+        if (!document.getElementById(name) || !pages.some(function (p) { return p.id === name; })) return;
+        tabs.forEach(function (tab) {
+          const active = tab.dataset.page === name;
+          tab.setAttribute('aria-selected', String(active));
+          tab.tabIndex = active ? 0 : -1;
+        });
+        pages.forEach(function (page) { page.hidden = page.id !== name; });
+        if (moveFocus) { document.getElementById('tab-' + name).focus(); }
+        window.history.replaceState(null, '', '#' + name);
+      }
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener('click', function () { showPage(tab.dataset.page, false); });
+        tab.addEventListener('keydown', function (event) {
+          if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+          event.preventDefault();
+          const next = (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+          showPage(tabs[next].dataset.page, true);
+        });
+      });
+      document.querySelectorAll('[data-go]').forEach(function (button) {
+        button.addEventListener('click', function () { showPage(button.dataset.go, true); window.scrollTo(0, 0); });
+      });
+
+      const htmlBox = document.getElementById('html-code');
+      const cssBox = document.getElementById('css-code');
+      const jsBox = document.getElementById('js-code');
+      const originals = [htmlBox.value, cssBox.value, jsBox.value];
+      function runCode() {
+        const documentText = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>' +
+          cssBox.value.replace(/<\/style/gi, '<\\/style') +
+          '</style></head><body>' + htmlBox.value +
+          '<script>' + jsBox.value.replace(/<\/script/gi, '<\\/script') + '<\/script></body></html>';
+        document.getElementById('preview').srcdoc = documentText;
+        document.getElementById('run-status').textContent = 'Preview updated. Try clicking your button!';
+      }
+      document.getElementById('run').addEventListener('click', runCode);
+      document.getElementById('reset').addEventListener('click', function () {
+        [htmlBox, cssBox, jsBox].forEach(function (box, i) { box.value = originals[i]; });
+        runCode();
+      });
+      document.querySelectorAll('[data-answer]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          document.getElementById('quiz-feedback').textContent =
+            button.dataset.answer === 'css' ? 'Exactly! CSS controls how things look. ✅' : 'Not quite. Think about which language handles appearance.';
+        });
+      });
+      document.querySelectorAll('.copy').forEach(function (button) {
+        button.addEventListener('click', async function () {
+          try {
+            await navigator.clipboard.writeText(button.dataset.copy);
+            document.getElementById('copy-status').textContent = 'Copied! Paste it into ChatGPT or Claude.';
+          } catch (err) {
+            document.getElementById('copy-status').textContent = 'Copy unavailable here. You can select the prompt text in the button instead.';
+          }
+        });
+      });
+      const start = window.location.hash.slice(1);
+      if (pages.some(function (page) { return page.id === start; })) showPage(start, false);
+      runCode();
+    }());
+  </script>
+</body>
+</html>
